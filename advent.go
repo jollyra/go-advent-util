@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -27,14 +28,14 @@ func InputLines(filename string) []string {
 	return lines
 }
 
-// LinesToInts takes an array of lines from a file read and safely converts them
+// StringsToInts takes an array of lines from a file read and safely converts them
 // to an array of ints.
-func LinesToInts(lines []string) []int {
+func StringsToInts(lines []string) []int {
 	ints := make([]int, 0, len(lines))
 	for lineno, line := range lines {
 		i, err := strconv.Atoi(strings.TrimSpace(line))
 		if err != nil {
-			log.Fatalf("Unable to parse int on line number %v\n%v", lineno+1, err)
+			log.Fatalf("Unable to parse int at position %v\n%v", lineno+1, err)
 		}
 		ints = append(ints, i)
 	}
@@ -49,4 +50,17 @@ func MustGetArg(argIndex int) string {
 		log.Fatalf("No arg at position os.Args[%d]", argIndex)
 	}
 	return os.Args[argIndex]
+}
+
+// StripNonDigits replaces all non-digit characters in line with spaces.
+func StripNonDigits(line string) string {
+	re := regexp.MustCompile("[^0-9]")
+	return re.ReplaceAllString(line, " ")
+}
+
+// Split slices line into substrings separated by any amount of whitespace.
+func Split(line string) []string {
+	line = strings.TrimSpace(line)
+	re := regexp.MustCompile("[[:space:]]+")
+	return re.Split(line, -1)
 }
