@@ -9,6 +9,9 @@ import (
 	"strings"
 )
 
+// BigInt is the max int.
+var BigInt = 1<<63 - 1
+
 // InputLines reads a file and returns the input split by lines. Exits with
 // status 1 if the file doesn't exist.
 func InputLines(filename string) []string {
@@ -63,4 +66,39 @@ func Split(line string) []string {
 	line = strings.TrimSpace(line)
 	re := regexp.MustCompile("[[:space:]]+")
 	return re.Split(line, -1)
+}
+
+// MaxInts return the max in in xs
+func MaxInts(xs ...int) int {
+	max := xs[0]
+	for _, x := range xs {
+		if x > max {
+			max = x
+		}
+	}
+	return max
+}
+
+// Max returns the greater of a and b.
+func Max(a, b int) int {
+	if b > a {
+		return b
+	}
+	return a
+}
+
+// Min returns the lesser of a and b.
+func Min(a, b int) int {
+	if b < a {
+		return b
+	}
+	return a
+}
+
+// Abs returns |x|.
+func Abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
 }
