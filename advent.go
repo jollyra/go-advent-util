@@ -111,3 +111,26 @@ func SumInts(xs ...int) int {
 	}
 	return sum
 }
+
+// MaxVal return the key and value of the item in the map with the max value.
+func MaxVal(m map[int]int) (int, int) {
+	maxVal := -1 << 31
+	maxKey := -1
+	for k, v := range m {
+		if v > maxVal {
+			maxVal = v
+			maxKey = k
+		}
+	}
+	return maxKey, maxVal
+}
+
+// Insert inserts integer x after xs[index].
+func Insert(xs []int, x, i int) []int {
+	return append(xs[:i+1], append([]int{x}, xs[i+1:]...)...)
+}
+
+// Remove removes the integer after xs[index].
+func Remove(xs []int, i int) []int {
+	return append(xs[:i], xs[i+1:]...)
+}
