@@ -102,3 +102,12 @@ func Abs(x int) int {
 	}
 	return x
 }
+
+// SumInts return the sum of the ints in xs.
+func SumInts(xs ...int) int {
+	sum := 0
+	for i := range xs {
+		sum += xs[i]
+	}
+	return sum
+}
