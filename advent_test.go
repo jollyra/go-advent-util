@@ -1,16 +1,6 @@
-package main
+package advent
 
 import "testing"
-
-// Insert inserts integer x after xs[index].
-func Insert(xs []int, x, i int) []int {
-	return append(xs[:i+1], append([]int{x}, xs[i+1:]...)...)
-}
-
-// Remove removes the integer after xs[index].
-func Remove(xs []int, i int) []int {
-	return append(xs[:i], xs[i+1:]...)
-}
 
 func TestInsert(t *testing.T) {
 	cases := []struct {

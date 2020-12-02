@@ -9,6 +9,16 @@ type Point struct{ X, Y int }
 
 func (p Point) String() string { return fmt.Sprintf("Point{x=%d, y=%d}", p.X, p.Y) }
 
+// RotateR rotates (or turns) v to the right.
+func RotateR(v Point) Point {
+	return Point{-v.Y, v.X}
+}
+
+// RotateL rotates (or turns) v to the left.
+func RotateL(v Point) Point {
+	return Point{v.Y, -v.X}
+}
+
 // Equals returns true if p and q are the same.
 func (p *Point) Equals(q Point) bool {
 	if p.X == q.X && p.Y == q.Y {
@@ -17,13 +27,18 @@ func (p *Point) Equals(q Point) bool {
 	return false
 }
 
-// Neighbours4 returns all neighbour of point (x, y) including diagonals.
+// Add returns a new point equal to the sum of p and q.
+func Add(p, q Point) Point {
+	return Point{p.X + q.X, p.Y + q.Y}
+}
+
+// Neighbours4 returns all adjacent neighbour of point (x, y) in reading order.
 func (p Point) Neighbours4() []Point {
 	points := []Point{
+		Point{p.X, p.Y - 1},
+		Point{p.X - 1, p.Y},
 		Point{p.X + 1, p.Y},
 		Point{p.X, p.Y + 1},
-		Point{p.X - 1, p.Y},
-		Point{p.X, p.Y - 1},
 	}
 	return points
 }
